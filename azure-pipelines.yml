@@ -1,0 +1,64 @@
+# Build Pipeline - which build, test and publish artifact
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  azureDevOpsProjectName: Xml2DbMapper
+  feedName: Xml2DbMapper
+
+steps:
+- task: UseGitVersion@5
+  displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbWrapper'
+  inputs:
+    versionSpec: '5.x'
+    updateAssemblyInfo: true
+    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\SharedAssemblyInfo.cs'
+
+- task: DotNetCoreCLI@2
+  displayName: Restore packages
+  inputs:
+    command: restore
+    projects: '**/*.sln'
+    versioningScheme: byBuildNumber
+- task: DotNetCoreCLI@2
+  displayName: 'Build Xml2DbWrapper Solution'
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(BuildConfiguration) /p:Version=$(GitVersion.NuGetVersion)'
+    projects: Xml2DbWrapper.sln
+    versioningScheme: byBuildNumber
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack Xml2DbWrapper.Core'
+  inputs:
+    command: 'pack'
+    arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
+    packagesToPack: 'Xml2DbWrapper.Core/Xml2DbWrapper.Core.csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion.NuGetVersion
+- task: DotNetCoreCLI@2
+  displayName: 'Pack Xml2DbWrapper.Reader'
+  inputs:
+    command: 'pack'
+    arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
+    packagesToPack: 'Xml2DbWrapper.Reader/Xml2DbWrapper.Reader.csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion.NuGetVersion
+- task: DotNetCoreCLI@2
+  displayName: 'Pack Xml2DbWrapper.Writer'
+  inputs:
+    command: 'pack'
+    arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
+    packagesToPack: 'Xml2DbWrapper.Writer/Xml2DbWrapper.Writer.csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion.NuGetVersion
+- task: DotNetCoreCLI@2
+  displayName: 'Push artifacts in $(azureDevOpsProjectName)/$(feedName) feed'
+  inputs:
+    command: 'push'
+    nuGetFeedType: 'internal'
+    packagesToPush: '$(build.artifactStagingDirectory)/*.nupkg'
+    publishVstsFeed: '$(azureDevOpsProjectName)/$(feedName)'
+    versioningScheme: byBuildNumber
