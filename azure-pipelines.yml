@@ -1,4 +1,4 @@
-# Standard CI build - which build, test and publish artifact
+# Build Pipeline - which build, test and publish artifact
 
 pool:
   name: Xml2DbWrapper Build Pipeline
@@ -11,25 +11,12 @@ variables:
 
 steps:
 - task: UseGitVersion@5
-  displayName: 'Git Version updates AssemblyInfo for Xml2DbWrapper.Core'
+  displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbWrapper'
   inputs:
     versionSpec: '5.x'
     updateAssemblyInfo: true
-    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\Xml2DbWrapper.Core\Properties\AssemblyInfo.cs'
-- task: UseGitVersion@5
-  displayName: 'Git Version updates AssemblyInfo for Xml2DbWrapper.Reader'
-  inputs:
-    versionSpec: '5.x'
-    updateAssemblyInfo: true
-    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\Xml2DbWrapper.Reader\Properties\AssemblyInfo.cs'
-- task: UseGitVersion@5
-  displayName: 'Git Version updates AssemblyInfo for Xml2DbWrapper.Writer'
-  inputs:
-    versionSpec: '5.x'
-    updateAssemblyInfo: true
-    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\Xml2DbWrapper.Reader\Properties\AssemblyInfo.cs'
+    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\SharedAssemblyInfo.cs'
 
-# Build Solution
 - task: DotNetCoreCLI@2
   displayName: Restore packages
   inputs:
@@ -44,7 +31,6 @@ steps:
     projects: Xml2DbWrapper.sln
     versioningScheme: byBuildNumber
 
-# Publish Artifacts
 - task: DotNetCoreCLI@2
   displayName: 'Pack Xml2DbWrapper.Core'
   inputs:
