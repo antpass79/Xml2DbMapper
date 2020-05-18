@@ -1,7 +1,6 @@
 # Build Pipeline - which build, test and publish artifact
 
 pool:
-  name: Xml2DbWrapper Build Pipeline
   vmImage: 'ubuntu-latest'
 
 variables:
