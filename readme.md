@@ -41,11 +41,10 @@ Follow the below steps:
 
  - <https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx>
 
-## CI/CD
-
-### AzureDevOps - Branches
+### AzureDevOps - CI/CD
 
 - <https://cloudblogs.microsoft.com/industry-blog/en-gb/technetuk/2019/06/18/perfecting-continuous-delivery-of-nuget-packages-for-azure-artifacts/>
+- <http://thecollaborationcorner.com/2019/02/28/azure-devops-with-spfx-gitflow-gitversion/>
 
 ### Git - Commands
 
