@@ -21,7 +21,6 @@ steps:
       echo 'git loop all branches'
       
       git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
-      L
       
       echo 'git push all branches'
       
