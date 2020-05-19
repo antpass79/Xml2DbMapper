@@ -10,7 +10,7 @@ variables:
 
 steps:
 - task: UseGitVersion@5
-  displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbWrapper'
+  displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbMapper'
   inputs:
     versionSpec: '5.x'
     updateAssemblyInfo: true
@@ -23,35 +23,19 @@ steps:
     projects: '**/*.sln'
     versioningScheme: byBuildNumber
 - task: DotNetCoreCLI@2
-  displayName: 'Build Xml2DbWrapper Solution'
+  displayName: 'Build Xml2DbMapper Solution'
   inputs:
     command: 'build'
     arguments: '--configuration $(BuildConfiguration) /p:Version=$(GitVersion.NuGetVersion)'
-    projects: Xml2DbWrapper.sln
+    projects: Xml2DbMapper.sln
     versioningScheme: byBuildNumber
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack Xml2DbWrapper.Core'
+  displayName: 'Pack Xml2DbMapper'
   inputs:
     command: 'pack'
     arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
-    packagesToPack: 'Xml2DbWrapper.Core/Xml2DbWrapper.Core.csproj'
-    versioningScheme: byEnvVar
-    versionEnvVar: GitVersion.NuGetVersion
-- task: DotNetCoreCLI@2
-  displayName: 'Pack Xml2DbWrapper.Reader'
-  inputs:
-    command: 'pack'
-    arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
-    packagesToPack: 'Xml2DbWrapper.Reader/Xml2DbWrapper.Reader.csproj'
-    versioningScheme: byEnvVar
-    versionEnvVar: GitVersion.NuGetVersion
-- task: DotNetCoreCLI@2
-  displayName: 'Pack Xml2DbWrapper.Writer'
-  inputs:
-    command: 'pack'
-    arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
-    packagesToPack: 'Xml2DbWrapper.Writer/Xml2DbWrapper.Writer.csproj'
+    packagesToPack: 'Xml2DbMapper.sln'
     versioningScheme: byEnvVar
     versionEnvVar: GitVersion.NuGetVersion
 - task: DotNetCoreCLI@2
