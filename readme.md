@@ -45,12 +45,12 @@ Follow the below steps:
 
 - <https://cloudblogs.microsoft.com/industry-blog/en-gb/technetuk/2019/06/18/perfecting-continuous-delivery-of-nuget-packages-for-azure-artifacts/>
 - <http://thecollaborationcorner.com/2019/02/28/azure-devops-with-spfx-gitflow-gitversion/>
-- <https://stackoverflow.com/questions/55768926/logon-failed-use-ctrlc-to-cancel-basic-credential-prompt-to-git-in-azure-devop>
 
 ### Azure DevOps - Github Sync
 
 - <https://ngohungphuc.wordpress.com/2018/12/26/sync-between-github-and-vsts-azure-devops-repo/>
 - <https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page>
+- <https://stackoverflow.com/questions/55768926/logon-failed-use-ctrlc-to-cancel-basic-credential-prompt-to-git-in-azure-devop>
 
 ### Git - Commands
 
