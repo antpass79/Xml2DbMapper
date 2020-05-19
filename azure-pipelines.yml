@@ -16,7 +16,7 @@ steps:
       echo 'git config'
       
       git config --global user.email "antpass79@gmail.com"
-      git config --global user.name "antpass79"
+      git config --global user.name "ANTONIO PASSALACQUA"
       
       echo 'git loop all branches'
       
