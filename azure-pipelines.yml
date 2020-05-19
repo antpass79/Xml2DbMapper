@@ -7,6 +7,7 @@ variables:
   buildConfiguration: 'Release'
   azureDevOpsProjectName: 'Xml2DbMapper'
   feedName: 'Xml2DbMapper'
+  XML2DBTOKEN: $(xml2dbtoken)
 
 steps:
 - task: Bash@3
@@ -24,7 +25,7 @@ steps:
       
       echo 'git push all branches'
       
-      git push https://$xml2dbtoken@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
+      git push https://$XML2DBTOKEN@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
 - task: UseGitVersion@5
   displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbMapper'
   inputs:
