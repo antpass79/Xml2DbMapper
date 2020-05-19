@@ -5,8 +5,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  azureDevOpsProjectName: Xml2DbMapper
-  feedName: Xml2DbMapper
+  azureDevOpsProjectName: 'Xml2DbMapper'
+  feedName: 'Xml2DbMapper'
 
 steps:
 - task: UseGitVersion@5
