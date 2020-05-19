@@ -24,7 +24,7 @@ steps:
       
       echo 'git push all branches'
       
-      git push https://$(xml2dbtoken)@dev.azure.com/Xml2DbMapper/_git/Xml2DbMapper -u --all
+      git push https://$XML2DBTOKEN@dev.azure.com/Xml2DbMapper/_git/Xml2DbMapper -u --all
 - task: UseGitVersion@5
   displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbMapper'
   inputs:
