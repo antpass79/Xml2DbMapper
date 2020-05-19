@@ -1,12 +1,12 @@
 # Build Pipeline - which build, test and publish artifact
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
-  azureDevOpsProjectName: Xml2DbMapper
-  feedName: Xml2DbMapper
+  azureDevOpsProjectName: 'Xml2DbMapper'
+  feedName: 'Xml2DbMapper'
 
 steps:
 - task: UseGitVersion@5
