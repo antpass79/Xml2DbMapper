@@ -10,6 +10,7 @@ variables:
 
 steps:
 - task: Bash@3
+  displayName: 'Synchronize Azure DevOps to Github'
   inputs:
     targetType: inline
     script: |
