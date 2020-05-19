@@ -9,14 +9,17 @@ variables:
   feedName: 'Xml2DbMapper'
 
 steps:
-- script: |
-   echo 'git config'      
-   git config --global user.email ""
-   git config --global user.name ""      
-   echo 'git loop all branches'      
-   git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done      
-   echo 'git push all branches'      
-   git push https://$XML2DBTOKEN@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
+- task: Bash@3
+  inputs:
+    targetType: inline
+    script: |
+      echo 'git config'      
+      git config --global user.email ""
+      git config --global user.name ""      
+      echo 'git loop all branches'      
+      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done      
+      echo 'git push all branches'      
+      git push https://$XML2DBTOKEN@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
   env:
     XML2DBTOKEN: $(xml2dbtoken)
     
