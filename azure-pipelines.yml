@@ -14,7 +14,7 @@ steps:
   inputs:
     versionSpec: '5.x'
     updateAssemblyInfo: true
-    updateAssemblyInfoFilename: '**/SharedAssemblyInfo.cs'
+    updateAssemblyInfoFilename: '$(Build.SourcesDirectory)/src/Xml2DbMapper/SharedAssemblyInfo.cs'
 
 - task: DotNetCoreCLI@2
   displayName: Restore packages
