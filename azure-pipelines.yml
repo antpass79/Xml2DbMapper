@@ -15,8 +15,8 @@ steps:
     script: |
       echo 'git config'
       
-      git config --global user.email "antpass79@gmail.com"
-      git config --global user.name "ANTONIO PASSALACQUA"
+      git config --global user.email ""
+      git config --global user.name ""
       
       echo 'git loop all branches'
       
@@ -24,7 +24,7 @@ steps:
       
       echo 'git push all branches'
       
-      git push https://$XML2DBTOKEN@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
+      git push https://$xml2dbtoken@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
 - task: UseGitVersion@5
   displayName: 'Git Version updates SharedAssemblyInfo for Xml2DbMapper'
   inputs:
