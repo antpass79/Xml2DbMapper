@@ -9,6 +9,7 @@ branches:
  feature:
    tag: alpha
    increment: Minor
+
  master:
    tag: ''
 
