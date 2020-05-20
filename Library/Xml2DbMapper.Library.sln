@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xml2DbMapper.Reader", "Xml2DbMapper.Reader\Xml2DbMapper.Reader.csproj", "{776D1CED-616E-4B86-AF3E-BE7457A6DA73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xml2DbMapper.Reader", "Xml2DbMapper.Reader\Xml2DbMapper.Reader.csproj", "{776D1CED-616E-4B86-AF3E-BE7457A6DA73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xml2DbMapper.Writer", "Xml2DbMapper.Writer\Xml2DbMapper.Writer.csproj", "{AA93A972-ACAF-4B50-A99E-1CF2339600C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xml2DbMapper.Writer", "Xml2DbMapper.Writer\Xml2DbMapper.Writer.csproj", "{AA93A972-ACAF-4B50-A99E-1CF2339600C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
