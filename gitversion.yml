@@ -7,7 +7,7 @@ patch-version-bump-message: '\+semver:\s?(fix|patch)'
 
 branches:
  feature:
-   tag: 'alpha'
+   tag: alpha
    increment: Minor
 
  master:
