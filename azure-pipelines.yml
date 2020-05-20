@@ -46,6 +46,16 @@ steps:
     projects: Library\Xml2DbMapper.Library.sln
     versioningScheme: byBuildNumber
 
+- task: VSTest@2
+  displayName: 'Run all Tests'
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*.Tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)\Library'
+
 - task: DotNetCoreCLI@2
   displayName: 'Pack Xml2DbMapper'
   inputs:
