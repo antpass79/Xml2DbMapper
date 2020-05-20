@@ -7,15 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xml2DbMapper.Core", "Xml2Db
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4205D081-8A5B-4C07-9910-B576F9678F06}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		gitversion.yml = gitversion.yml
-		readme.md = readme.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xml2DbMapper.Reader", "Xml2DbMapper.Reader\Xml2DbMapper.Reader.csproj", "{776D1CED-616E-4B86-AF3E-BE7457A6DA73}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xml2DbMapper.Writer", "Xml2DbMapper.Writer\Xml2DbMapper.Writer.csproj", "{AA93A972-ACAF-4B50-A99E-1CF2339600C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACE13211-8841-4BBE-8AEB-D8AD0A3BB637}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xml2DbMapper.Library.Tests", "Xml2DbMapper.Library.Tests\Xml2DbMapper.Library.Tests.csproj", "{47286B6B-C5AF-41A3-A724-554ACC05AD26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +36,16 @@ Global
 		{AA93A972-ACAF-4B50-A99E-1CF2339600C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA93A972-ACAF-4B50-A99E-1CF2339600C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA93A972-ACAF-4B50-A99E-1CF2339600C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47286B6B-C5AF-41A3-A724-554ACC05AD26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47286B6B-C5AF-41A3-A724-554ACC05AD26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47286B6B-C5AF-41A3-A724-554ACC05AD26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47286B6B-C5AF-41A3-A724-554ACC05AD26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47286B6B-C5AF-41A3-A724-554ACC05AD26} = {ACE13211-8841-4BBE-8AEB-D8AD0A3BB637}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F746577-17BF-4864-9A42-70A94F3B2F0C}
