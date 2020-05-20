@@ -14,12 +14,12 @@ steps:
   inputs:
     targetType: inline
     script: |
-      echo 'git config'      
+      echo 'git config'
       git config --global user.email ""
-      git config --global user.name ""      
-      echo 'git loop all branches'      
-      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done      
-      echo 'git push all branches'      
+      git config --global user.name ""
+      echo 'git loop all branches'
+      git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+      echo 'git push all branches'
       git push https://$XML2DBTOKEN@dev.azure.com/antpass79/Xml2DbMapper/_git/Xml2DbMapper -u --all
   env:
     XML2DBTOKEN: $(xml2dbtoken)
@@ -29,20 +29,21 @@ steps:
   inputs:
     versionSpec: '5.x'
     updateAssemblyInfo: true
-    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\SharedAssemblyInfo.cs'
+    updateAssemblyInfoFilename: '$(system.defaultworkingdirectory)\Library\SharedAssemblyInfo.cs'
 
 - task: DotNetCoreCLI@2
   displayName: Restore packages
   inputs:
     command: restore
-    projects: '**/*.sln'
+    projects: 'Library\*.sln'
     versioningScheme: byBuildNumber
+
 - task: DotNetCoreCLI@2
   displayName: 'Build Xml2DbMapper Solution'
   inputs:
     command: 'build'
     arguments: '--configuration $(BuildConfiguration) /p:Version=$(GitVersion.NuGetVersion)'
-    projects: Xml2DbMapper.sln
+    projects: Library\Xml2DbMapper.Library.sln
     versioningScheme: byBuildNumber
 
 - task: DotNetCoreCLI@2
@@ -50,9 +51,10 @@ steps:
   inputs:
     command: 'pack'
     arguments: --output $(build.artifactstagingdirectory) --configuration $(buildConfiguration)
-    packagesToPack: 'Xml2DbMapper.sln'
+    packagesToPack: 'Library\Xml2DbMapper.Library.sln'
     versioningScheme: byEnvVar
     versionEnvVar: GitVersion.NuGetVersion
+
 - task: DotNetCoreCLI@2
   displayName: 'Push artifacts in $(azureDevOpsProjectName)/$(feedName) feed'
   inputs:
