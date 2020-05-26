@@ -36,5 +36,21 @@ namespace Xml2DbMapper.Library.Tests
 
             Assert.False(databaseLifecycle.Created);
         }
+
+        [Fact]
+        public void KeepDatabase()
+        {
+            var options = new DbContextOptionsBuilder<FeaturesContext>()
+                .UseSqlite("DataSource=:memory:")
+                .Options;
+
+            IDatabaseLifecycle databaseLifecycle;
+            using (databaseLifecycle = new DatabaseLifecycle(options, true).Scope())
+            {
+                Assert.True(databaseLifecycle.Created);
+            }
+
+            Assert.True(databaseLifecycle.Created);
+        }
     }
 }
