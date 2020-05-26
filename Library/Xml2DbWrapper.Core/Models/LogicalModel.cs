@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Xml2DbMapper.Core.Porting.Contract.Enums;
+using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 namespace Xml2DbMapper.Core.Models
 {
@@ -19,9 +20,12 @@ namespace Xml2DbMapper.Core.Models
         public string ModelFamily { get; set; }
         public int? PhModId { get; set; }
         public string StyleName { get; set; }
-        public short ContexVisionModule { get; set; }
-        public short SubPhysModel { get; set; }
-        public short? Type { get; set; }
+        //public short ContexVisionModule { get; set; }
+        public CVModule ContexVisionModule { get; set; } // ANTO CAST        
+        //public short SubPhysModel { get; set; }
+        public PhysicalSubModel SubPhysModel { get; set; } // ANTO CAST
+        //public short? Type { get; set; }
+        public SystemEnvironment? Type { get; set; } // ANTO CAST
         public bool? IsDefault { get; set; }
         public int? LicenseId { get; set; }
         public int? SettingsFamilyId { get; set; }

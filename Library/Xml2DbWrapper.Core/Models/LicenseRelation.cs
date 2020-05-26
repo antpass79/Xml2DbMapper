@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 namespace Xml2DbMapper.Core.Models
 {
@@ -13,8 +13,10 @@ namespace Xml2DbMapper.Core.Models
         public int Id { get; set; }
         public int ParentFeatureId { get; set; }
         public int FeatureId { get; set; }
-        public short ParentType { get; set; }
-        public short HiderType { get; set; }
+        //public short ParentType { get; set; }
+        public ParentTypes ParentType { get; set; } // ANTO CAST
+        //public short HiderType { get; set; }
+        public HiderTypes HiderType { get; set; } // ANTO CAST
 
         public virtual Feature Feature { get; set; }
         public virtual Feature ParentFeature { get; set; }
