@@ -7,6 +7,10 @@ namespace Xml2DbMapper.Core.Models
 {
     public partial class ProbeSettingsFamily
 	{
+		public ProbeSettingsFamily()
+		{
+		}
+
 		// constructor from correstpondent probeInfo class
 		public ProbeSettingsFamily(Int32 probeId, probeInfo probeInfo)
 		{
