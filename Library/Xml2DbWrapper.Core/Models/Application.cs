@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Xml2DbMapper.Core.Porting.Contract.Enums;
 
 namespace Xml2DbMapper.Core.Models
 {
@@ -14,7 +15,8 @@ namespace Xml2DbMapper.Core.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public short? AppType { get; set; }
+        //public short? AppType { get; set; }
+        public SystemEnvironment? AppType { get; set; } // ANTO CAST
         public string ProbeDescrName { get; set; }
         public string Abbreviation { get; set; }
         public string Localization { get; set; }

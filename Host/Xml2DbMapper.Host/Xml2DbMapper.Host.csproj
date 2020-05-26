@@ -11,4 +11,8 @@
     <PackageReference Include="Xml2DbMapper.Writer" Version="1.0.34" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\Xml2DbWrapper.Core\Xml2DbMapper.Core.csproj" />
+  </ItemGroup>
+
 </Project>
