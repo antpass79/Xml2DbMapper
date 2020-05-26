@@ -9,14 +9,16 @@ namespace Xml2DbMapper.Core
         #region Data Members
 
         private readonly FeaturesContext _context;
+        private readonly bool _keepDatabase;
 
         #endregion
 
         #region Constructors
 
-        public DatabaseLifecycle(DbContextOptions<FeaturesContext> options)
+        public DatabaseLifecycle(DbContextOptions<FeaturesContext> options, bool keepDatabase = false)
         {
             _context = new FeaturesContext(options);
+            _keepDatabase = keepDatabase;
         }
 
         #endregion
@@ -43,7 +45,11 @@ namespace Xml2DbMapper.Core
             {
                 if (disposing)
                 {
-                    Delete();
+                    if (!_keepDatabase)
+                    {
+                        Delete();
+                    }
+
                     _context.Dispose();
                 }
 
