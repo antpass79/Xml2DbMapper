@@ -21,6 +21,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{20D440E1-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3E2B405-819B-416C-A920-41706D2BFB9F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD16B587-1EB2-4517-96A0-7C6A91EE3D1D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\gitversion.yml = ..\gitversion.yml
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
