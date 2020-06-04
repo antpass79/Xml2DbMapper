@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    /// bundle table partial definition
-    public partial class Bundle
+	[DataContract(Namespace = "")]
+	/// bundle table partial definition
+	public partial class Bundle
 	{
 		public static List<Bundle> Import(Dictionary<String, int> dictFeat, Paths Paths, string log)
 		{

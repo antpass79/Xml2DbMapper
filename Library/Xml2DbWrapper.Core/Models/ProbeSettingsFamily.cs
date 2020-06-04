@@ -13,7 +13,7 @@ namespace Xml2DbMapper.Core.Models
         public string ProbeDataFileNameFrontal { get; set; }
         public string ProbeDataFileNameLateral { get; set; }
 
-        public virtual Probe Probe { get; set; }
-        public virtual SettingFamily SettingsFamily { get; set; }
+        //public virtual Probe Probe { get; set; }
+        //public virtual SettingFamily SettingsFamily { get; set; }
     }
 }

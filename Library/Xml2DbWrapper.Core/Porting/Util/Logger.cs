@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Xml2DbMapper.Core.Porting.Util
 {
@@ -18,23 +21,70 @@ namespace Xml2DbMapper.Core.Porting.Util
 		}
 	}
 
+	public class ConsoleLogger : BaseLogger
+	{
+		public override void Log(string message)
+		{
+			Console.WriteLine(message);
+		}
+	}
+
+	public class FileLogger : BaseLogger, IDisposable
+	{
+		private readonly StreamWriter _streamWriter;
+
+		public FileLogger(string filePath)
+			: this(new StreamWriter(filePath, true))
+		{
+		}
+
+		public FileLogger(StreamWriter streamWriter)
+		{
+			_streamWriter = streamWriter;
+		}
+
+		public void Dispose()
+		{
+			_streamWriter.Dispose();
+		}
+
+		public override void Log(string message)
+		{
+			_streamWriter.WriteLine(message);
+			_streamWriter.Flush();
+		}
+	}
+
 	public static class Logger
 	{
-		static BaseLogger _logger;
+		static List<BaseLogger> _loggers;
 
 		static Logger()
 		{
-			_logger = new TraceLogger();
+			_loggers = new List<BaseLogger>();
+			_loggers.Add(new TraceLogger());
+			_loggers.Add(new ConsoleLogger());
 		}
 
-		static void SetLogger(BaseLogger logger)
+		public static void AddLogger(BaseLogger logger)
 		{
-			_logger = logger;
+			_loggers.Add(logger);
 		}
 
-		public static void Log(string message)
+		public static void Error(string message = "")
 		{
-			_logger.Log(message);
+			Parallel.ForEach(_loggers, logger =>
+			{
+				logger.Log($"{Environment.NewLine}***************** ERROR *****************{Environment.NewLine} {message}");
+			});
+		}
+
+		public static void Log(string message = "")
+		{
+			Parallel.ForEach(_loggers, logger =>
+			{
+				logger.Log($" >>> {DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture)} - {message}");
+			});
 		}
 	}
 }

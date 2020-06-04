@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Xml2DbMapper.Core.Porting.Contract.Enums;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class ProbeSettingsFamily
+	[DataContract(Namespace = "")]
+	public partial class ProbeSettingsFamily
 	{
 		public ProbeSettingsFamily()
 		{

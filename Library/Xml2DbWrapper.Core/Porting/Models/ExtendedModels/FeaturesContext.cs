@@ -1,4 +1,6 @@
 ﻿using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,20 +14,30 @@ namespace Xml2DbMapper.Core.Models
 {
 	public partial class FeaturesContext
 	{
+		static FeaturesContext _context;
+
 		public static void Create(String p_DatabasePath)
 		{
 			// ANTO DB LIFECYCLE
 			//GC.TryStartNoGCRegion(1000 * 10000);
 			//SqlServerCeUtil<DatabaseTemplate>.ResetDatabase(p_DatabasePath, c => new DatabaseTemplate(c));
 			//Upgrade(p_DatabasePath);
-			GC.EndNoGCRegion();
+			var options = new DbContextOptionsBuilder<FeaturesContext>()
+				.UseSqlite($"Data Source={p_DatabasePath}")
+				.Options;
+
+			_context = new FeaturesContext(options);
+			_context.Database.EnsureDeleted();
+			_context.Database.EnsureCreated();
+
+			//GC.EndNoGCRegion();
 		}
 
 		public static FeaturesContext Open(String p_DatabasePath)
 		{
 			// ANTO DB LIFECYCLE
 			//return SqlServerCeUtil<Database>.OpenDatabase(p_DatabasePath, c => new Database(c));
-			return new FeaturesContext();
+			return _context;
 		}
 
 
@@ -278,7 +290,6 @@ namespace Xml2DbMapper.Core.Models
 			return rl;
 		}
 
-
 		/// imports the Biopsy Kits and relative rules associating to the probes
 		private void readKits(SettingsInfo settings, XDocument datafile)
 		{
@@ -286,10 +297,25 @@ namespace Xml2DbMapper.Core.Models
 			if (kits.Count > 0)
 			{
 				// ANTO DB ToList for bulk
-				this.BulkInsert(kits.Where(k => !BiopsyKits.Select(x => x.Name).Contains(k.Name)).ToList());
+				var items = kits
+					.Where(k => !BiopsyKits
+						.Select(x => x.Name)
+						.AsEnumerable()
+						.Contains(k.Name, StringComparer.OrdinalIgnoreCase))
+					.DistinctBy(item => item.Name, StringComparer.OrdinalIgnoreCase);
+
+				this.BulkInsert(items.ToList());
+
+				var kitItems = BiopsyKits
+					.ToList()
+					.Where(b => kits
+						.Select(x => x.Name)
+						.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
+					.DistinctBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+					.ToList();
 
 				settings.probe_Kits.Single(pk => pk.probe.Id == settings.currentProbe.Id && pk.settingsFamilyIdl == settings.currentProbeSettings.SettingsFamilyId)
-				.kits.AddRange(BiopsyKits.Where(b => kits.Select(x => x.Name).Contains(b.Name)).ToList());
+				.kits.AddRange(kitItems);
 			}
 		}
 
@@ -392,7 +418,11 @@ namespace Xml2DbMapper.Core.Models
 			Dictionaries dicts = new Dictionaries(_buffer);
 			dicts.fillDicts();
 			var l_probeKits = initProbeKits(_buffer);
-			var SettingsFamilies = ProbePreset.GroupBy(x => x.SettingsFamilyId).ToList();
+
+			// ANTO FIX
+			//var SettingsFamilies = ProbePreset.GroupBy(x => x.SettingsFamilyId).ToList();
+			var SettingsFamilies = ProbePreset.AsEnumerable().GroupBy(x => x.SettingsFamilyId).ToList();
+
 			int SettingsId = -2;
 			string probeName = "";
 			try
@@ -636,7 +666,12 @@ namespace Xml2DbMapper.Core.Models
 						NameInCode = kit.Name
 					});
 				}
+
+				// ANTO DB
 				this.BulkInsert(KitFeatures);
+				//this.AddRange(KitFeatures);
+				//this.SaveChanges();
+
 				//var CommandsToDB = this.GetChangeSet(); // ANTO DB not used
 				//this.SubmitChanges();
 				_buffer.p_features = this.Feature.ToList();

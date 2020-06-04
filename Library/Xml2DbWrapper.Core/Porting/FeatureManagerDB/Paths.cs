@@ -35,7 +35,9 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 		{
 			get
 			{
-				return outPath + "\\Features.sdf";
+				// ANTO FIX
+				return outPath + "\\Features.db";
+				//return outPath + "\\Features.sdf";
 			}
 		}
 

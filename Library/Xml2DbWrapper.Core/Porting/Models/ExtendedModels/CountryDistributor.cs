@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class CountryDistributor
+	[DataContract(Namespace = "")]
+	public partial class CountryDistributor
 	{
 		public static List<CountryDistributor> Import(DBBuffer _buffer, Paths Paths, string log)
 		{

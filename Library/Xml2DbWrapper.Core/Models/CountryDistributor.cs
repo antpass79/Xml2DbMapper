@@ -9,7 +9,7 @@ namespace Xml2DbMapper.Core.Models
         public int CountryId { get; set; }
         public int? DistributorId { get; set; }
 
-        public virtual Country Country { get; set; }
-        public virtual Distributor Distributor { get; set; }
+        //public virtual Country Country { get; set; }
+        //public virtual Distributor Distributor { get; set; }
     }
 }

@@ -3,7 +3,7 @@
 // FG 16112015
 namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 {
-    public abstract class AbsCountryVersionInput: IVersionAssociationInput
+    public abstract class AbsCountryVersionInput : IVersionAssociationInput
 	{
 		public AbsCountryVersionInput (int _gid, int? _DistributorId, int? _ModelId)
 		{

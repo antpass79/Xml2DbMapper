@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Xml.Linq;
+using System.Linq;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class SettingFamily
+	public partial class SettingFamily
 	{
 		public static List<SettingFamily> Import(List<Swpack> swpacks, Paths Paths, string log)
 		{

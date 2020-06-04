@@ -9,7 +9,7 @@ namespace Xml2DbMapper.Core.Models
         public int ParentFeatureId { get; set; }
         public int FeatureId { get; set; }
 
-        public virtual Feature Feature { get; set; }
-        public virtual Feature ParentFeature { get; set; }
+        //public virtual Feature Feature { get; set; }
+        //public virtual Feature ParentFeature { get; set; }
     }
 }
