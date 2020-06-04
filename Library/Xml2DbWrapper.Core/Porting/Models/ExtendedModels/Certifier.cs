@@ -6,8 +6,8 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    /// Certifying bodies
-    public partial class Certifier
+	/// Certifying bodies
+	public partial class Certifier
 	{
 		public static List<Certifier> Import(Paths Paths, string log)
 		{

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class Probe
+	public partial class Probe
 	{
 		// import probes from probelists of different settings families
 		public static List<ProbeBind> Import(DBBuffer _buffer, Paths Paths, string LogXml2DB)

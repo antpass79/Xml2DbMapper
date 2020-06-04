@@ -6,7 +6,7 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class CountryLicense
+	public partial class CountryLicense
 	{
 		public static List<CountryLicense> Import(DBBuffer _buffer, Paths Paths, string log)
 		{

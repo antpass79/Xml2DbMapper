@@ -5,7 +5,7 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class NormalRule : ComparableFields, ICloneable
+	public partial class NormalRule : ComparableFields, ICloneable
 	{
 		public NormalRule()
 		{

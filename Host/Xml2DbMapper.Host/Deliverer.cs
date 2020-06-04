@@ -12,10 +12,14 @@ namespace Xml2DbMapper.Host
 
 		public int DeliverAll(string OutputLogPath, int BuildNumber)
 		{
-			var RootPath = Environment.CurrentDirectory + @"\..\..\..\..\..";
+			// ANTO CONFIG
+			//var RootPath = Environment.CurrentDirectory + @"\..\..\..\..\..\..\..";
+			var RootPath = Environment.CurrentDirectory + System.Configuration.ConfigurationManager.AppSettings["CurrentDirectory"];
 			Paths = new Paths(RootPath);
 			var logFileXml2DB = GetLogFullName(OutputLogPath);
-			using (StreamWriter _LogFileXml2DB = new StreamWriter(logFileXml2DB)) { }
+
+			// ANTO LOG
+			//using (StreamWriter _LogFileXml2DB = new StreamWriter(logFileXml2DB)) { }
 
 			try
 			{

@@ -32,11 +32,11 @@ namespace Xml2DbMapper.Core.Models
         //public short RuleOrigin { get; set; }
         public ruleOrigins RuleOrigin { get; set; } // ANTO CAST
 
-        public virtual Application Application { get; set; }
-        public virtual Certifier Certifier { get; set; }
-        public virtual Country Country { get; set; }
-        public virtual Distributor Distributor { get; set; }
-        public virtual BiopsyKits Kit { get; set; }
-        public virtual LogicalModel LogicalModel { get; set; }
+        //public virtual Application Application { get; set; }
+        //public virtual Certifier Certifier { get; set; }
+        //public virtual Country Country { get; set; }
+        //public virtual Distributor Distributor { get; set; }
+        //public virtual BiopsyKits Kit { get; set; }
+        //public virtual LogicalModel LogicalModel { get; set; }
     }
 }
