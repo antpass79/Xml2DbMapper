@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class RegulatoryFeature
+	[DataContract(Namespace = "")]
+	public partial class RegulatoryFeature
 	{
 		public static List<RegulatoryFeature> Import(DBBuffer _buffer, Paths paths, string LogXml2DB)
 		{

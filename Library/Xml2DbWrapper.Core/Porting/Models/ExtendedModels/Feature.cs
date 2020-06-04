@@ -6,8 +6,8 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    /// Features partial class: generalizes options and applications
-    public partial class Feature
+	/// Features partial class: generalizes options and applications
+	public partial class Feature
 	{
 		public static List<Feature> Import(Dictionary<string, int> dictLicenses, Paths Paths, string log)
 		{

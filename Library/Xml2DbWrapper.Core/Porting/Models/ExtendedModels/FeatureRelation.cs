@@ -6,7 +6,7 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class FeatureRelation
+	public partial class FeatureRelation
 	{
 		public static List<FeatureRelation> Import(Dictionary<String, int> dictFeat, Paths Paths, string log, DBBuffer buffer)
 		{

@@ -1,21 +1,26 @@
-﻿using System;
+﻿using EFCore.BulkExtensions;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Xml.Linq;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Xml2DbMapper.Core.Porting.Contract.Enums;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
-using EFCore.BulkExtensions;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
+	[DataContract(Name = "Probe_Preset", Namespace = "")]
     /// association between probes and applications
     public partial class ProbePreset
 	{
+		[IgnoreDataMember]
 		public XDocument presetFile;
+		[IgnoreDataMember]
 		public String defaultName;
+		[IgnoreDataMember]
 		public String AllProbeDefaultName;
 
 		public ProbePreset()

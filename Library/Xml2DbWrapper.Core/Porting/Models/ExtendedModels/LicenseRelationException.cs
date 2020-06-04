@@ -6,7 +6,7 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class LicenseRelationException
+	public partial class LicenseRelationException
 	{
 		public static List<LicenseRelationException> Import(DBBuffer buffer, Paths Paths, string log)
 		{

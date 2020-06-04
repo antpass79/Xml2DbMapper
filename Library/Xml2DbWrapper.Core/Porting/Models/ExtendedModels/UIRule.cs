@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Xml2DbMapper.Core.Porting.Contract.Enums;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
@@ -8,7 +9,8 @@ using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 namespace Xml2DbMapper.Core.Models
 {
-    public partial class Uirule : FeaturesFields
+	[DataContract(Namespace = "")]
+	public partial class Uirule : FeaturesFields
 	{
 		public Uirule()
 		{

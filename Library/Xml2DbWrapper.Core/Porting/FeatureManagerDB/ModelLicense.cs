@@ -10,6 +10,7 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 	{
 		[DataMember (EmitDefaultValue = false, IsRequired = false)]
 		public LogicalModel Model;
+
 		[DataMember (EmitDefaultValue = false, IsRequired = false)]
 		public License License;
 		public ModelLicense(LogicalModel _model, License _license)

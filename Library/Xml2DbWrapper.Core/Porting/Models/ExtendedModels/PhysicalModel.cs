@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using Xml2DbMapper.Core.Porting.Contract.Enums;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 // FG 16112015
 namespace Xml2DbMapper.Core.Models
 {
-    /// physical models
-    public partial class PhysicalModel
+	/// physical models
+	public partial class PhysicalModel
 	{
 		public static List<PhysicalModel> Import(Paths Paths, string log)
 		{

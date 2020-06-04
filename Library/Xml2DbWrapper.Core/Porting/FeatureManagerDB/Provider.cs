@@ -128,22 +128,25 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 
 		public static void WriteErrorHeader(string LogPath, Exception ex)
 		{
-			string message = Environment.NewLine + "***************** ERROR ***************** " + Environment.NewLine + ex.Message;
-			using (StreamWriter Log = new StreamWriter(LogPath, true))
-			{
-				Log.WriteLine(message);
-			}
-			Console.WriteLine(message);
+			// ANTO LOG
+			//string message = Environment.NewLine + "***************** ERROR ***************** " + Environment.NewLine + ex.Message;
+			//using (StreamWriter Log = new StreamWriter(LogPath, true))
+			//{
+			//	Log.WriteLine(message);
+			//}
+			Logger.Log(ex.Message);
 		}
 
 		public static void WriteLogFormat(string LogPath, string message)
 		{
-			string result = ">>> " + DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + " - " + message;
-			using (StreamWriter Log = new StreamWriter(LogPath, true))
-			{
-				Log.WriteLine(result);
-			}
-			Console.WriteLine(result);
+			// ANTO LOG
+			//string result = ">>> " + DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + " - " + message;
+
+			//using (StreamWriter Log = new StreamWriter(LogPath, true))
+			//{
+			//	Log.WriteLine(result);
+			//}
+			Logger.Log(message);
 		}
 
 		public static string WriteErrorLogFormat(string message)
@@ -401,23 +404,33 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 			return ints;
 		}
 
-
 		static String FeatureKey = "NVPAxfvJ7Vp86Gd4";
 		public static void WriteFile<T>(T obj, string FullFileName, string FullKeyFileName)
 		{
-			var ws = new XmlWriterSettings();
-			ws.Indent = true;
-
-			var serializer = new DataContractSerializer(typeof(T));
-			using (XmlWriter wr = XmlWriter.Create(FullFileName, ws))
+			try
 			{
-				serializer.WriteObject(wr, obj);
+				var ws = new XmlWriterSettings();
+				ws.Indent = true;
+
+				// ANTO SERIALIZE
+				var serializer = new DataContractSerializer(typeof(T));
+
+				using (XmlWriter wr = XmlWriter.Create(FullFileName, ws))
+				{
+					serializer.WriteObject(wr, obj);
+				}
+
+				if (!string.IsNullOrEmpty(FullKeyFileName))
+				{
+					File.WriteAllText(FullKeyFileName, CreateSHA1Code(FullFileName));
+				}
+			}
+			catch (Exception e)
+			{
+				throw e;
 			}
 
-			if (!string.IsNullOrEmpty(FullKeyFileName))
-			{
-				File.WriteAllText(FullKeyFileName, CreateSHA1Code(FullFileName));
-			}
+			Logger.Log($"Serialized on file {FullFileName}");
 		}
 
 		public static void WriteFile<T>(T obj, string FullFileName)
