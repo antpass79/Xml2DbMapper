@@ -801,11 +801,11 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 		}
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public static void CreateDatabase(Paths Paths, string logFileXml2DB, int BuildNumber)
+		public static void CreateDatabase(Paths Paths, string logFileXml2DB, int BuildNumber, DatabaseType databaseType, string connectionString)
 		{
 			try
 			{
-				FeaturesContext.Create(Paths.DBfile);
+				FeaturesContext.Create(Paths.DBfile, databaseType, connectionString);
 				var db = FeaturesContext.Open(Paths.DBfile);
 				// ANTO DB LOG
 				//db.EnableLog();

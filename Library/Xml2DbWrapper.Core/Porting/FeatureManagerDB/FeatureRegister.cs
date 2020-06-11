@@ -163,7 +163,7 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 			Kits = _db.BiopsyKits.ToList();
 			ProbeTransducers = _db.ProbeTransducers.ToList();
 			Countries = _db.Country.ToList();
-			Certifiers = _db.Certifier.ToList();
+			Certifiers = _db.Certifier.OrderBy(item => item.Id).ToList(); // ANTO DB in SQL Server the Id 2 comes before Id 1
 			CertifierVersions = _db.CertifierVersion.ToList();
 			CountryVersions = _db.CountryVersion.ToList();
 			CountryLicenses = _db.CountryLicense.ToList();

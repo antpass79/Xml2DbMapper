@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Xml2DbMapper.Core;
 using Xml2DbMapper.Core.Porting.FeatureManagerDB;
 
 namespace Xml2DbMapper.Host
@@ -14,7 +15,7 @@ namespace Xml2DbMapper.Host
 		{
 			// ANTO CONFIG
 			//var RootPath = Environment.CurrentDirectory + @"\..\..\..\..\..\..\..";
-			var RootPath = Environment.CurrentDirectory + System.Configuration.ConfigurationManager.AppSettings["CurrentDirectory"];
+			var RootPath = Environment.CurrentDirectory + System.Configuration.ConfigurationManager.AppSettings["RelativePathToCurrentDirectory"];
 			Paths = new Paths(RootPath);
 			var logFileXml2DB = GetLogFullName(OutputLogPath);
 
@@ -23,7 +24,21 @@ namespace Xml2DbMapper.Host
 
 			try
 			{
-				FeatureMain.CreateDatabase(Paths, logFileXml2DB, BuildNumber);      // generate the database
+				DatabaseType databaseType = System.Configuration.ConfigurationManager.AppSettings["DatabaseType"] switch
+				{
+					"SQLite" => DatabaseType.SQLite,
+					"SQLiteInMemory" => DatabaseType.SQLiteInMemory,
+					"SQLServer" => DatabaseType.SQLServer,
+					_ => DatabaseType.SQLite
+				};
+
+				FeatureMain.CreateDatabase(
+					Paths,
+					logFileXml2DB,
+					BuildNumber,
+					databaseType,
+					System.Configuration.ConfigurationManager.AppSettings["ConnectionString"]);      // generate the database
+			
 				var register = FeatureMain.CreateDBFiles(Paths.DBfile, Paths.DBxmlPath, logFileXml2DB);          // xml files
 																												 //GenerateLicenseEnums(register, Paths.RootPath, logFileXml2DB);
 				Provider.WriteLogFormat(logFileXml2DB, "Generation Finished.");
