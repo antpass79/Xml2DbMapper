@@ -27,7 +27,7 @@ namespace Xml2DbMapper.Core.Porting.FeatureManagerDB
 		{
 			get
 			{
-				return RootPath + "\\Utilities\\FeatureManagerDB\\DatabaseFiles";
+				return RootPath + "\\Utilities\\FeatureManagerDB\\NewDatabaseFiles";
 			}
 		}
 
