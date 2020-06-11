@@ -1,8 +1,10 @@
 ﻿using EFCore.BulkExtensions;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,15 +18,28 @@ namespace Xml2DbMapper.Core.Models
 	{
 		static FeaturesContext _context;
 
-		public static void Create(String p_DatabasePath)
+		public static void Create(String p_DatabasePath, DatabaseType databaseType, string connectionString)
 		{
 			// ANTO DB LIFECYCLE
 			//GC.TryStartNoGCRegion(1000 * 10000);
 			//SqlServerCeUtil<DatabaseTemplate>.ResetDatabase(p_DatabasePath, c => new DatabaseTemplate(c));
 			//Upgrade(p_DatabasePath);
-			var options = new DbContextOptionsBuilder<FeaturesContext>()
-				.UseSqlite($"Data Source={p_DatabasePath}")
-				.Options;
+
+			var options = databaseType switch
+			{
+				DatabaseType.SQLite => new DbContextOptionsBuilder<FeaturesContext>()
+				.UseSqlite(string.IsNullOrWhiteSpace(connectionString) ? $"Data Source={p_DatabasePath}" : connectionString)
+				.Options,
+				DatabaseType.SQLiteInMemory => new DbContextOptionsBuilder<FeaturesContext>()
+				.UseSqlite(CreateInMemoryDatabase())
+				.Options,
+				DatabaseType.SQLServer => new DbContextOptionsBuilder<FeaturesContext>()
+				.UseSqlServer(connectionString)
+				.Options,
+				_ => new DbContextOptionsBuilder<FeaturesContext>()
+				.UseSqlite(CreateInMemoryDatabase())
+				.Options
+			};
 
 			_context = new FeaturesContext(options);
 			_context.Database.EnsureDeleted();
@@ -33,6 +48,12 @@ namespace Xml2DbMapper.Core.Models
 			//GC.EndNoGCRegion();
 		}
 
+		private static DbConnection CreateInMemoryDatabase()
+		{
+			var connection = new SqliteConnection("Filename=:memory:");
+			connection.Open();
+			return connection;
+		}
 		public static FeaturesContext Open(String p_DatabasePath)
 		{
 			// ANTO DB LIFECYCLE

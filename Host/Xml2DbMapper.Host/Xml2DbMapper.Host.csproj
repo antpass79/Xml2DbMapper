@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
-    <PackageReference Include="Xml2DbMapper.Core" Version="1.0.34" />
     <PackageReference Include="Xml2DbMapper.Reader" Version="1.0.34" />
     <PackageReference Include="Xml2DbMapper.Writer" Version="1.0.34" />
   </ItemGroup>

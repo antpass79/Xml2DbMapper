@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Xml2DbMapper.Core.Porting.Util;
+using Xml2DbMapper.Host.Tests;
 
 namespace Xml2DbMapper.Host
 {
@@ -11,6 +13,14 @@ namespace Xml2DbMapper.Host
 		static void Main(string[] args)
 		{
 			var OutpuLogPath = Environment.CurrentDirectory;
+
+			// ANTO LOG
+			var logPath = Deliverer.GetLogFullName(OutpuLogPath);
+			if (File.Exists(logPath))
+				File.Delete(logPath);
+			using var logger = new FileLogger(logPath);
+			Logger.AddLogger(logger);
+
 			try
 			{
 				// ANTO LOG
@@ -32,14 +42,12 @@ namespace Xml2DbMapper.Host
 					}
 				}
 
-				// ANTO LOG
-				var logPath = Deliverer.GetLogFullName(OutpuLogPath);
-				if (File.Exists(logPath))
-					File.Delete(logPath);
-				using var logger = new FileLogger(logPath);
-				Logger.AddLogger(logger);
-
 				var exitCode = deliverer.DeliverAll(OutpuLogPath, BuildNumber);
+
+				if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["RunTestsAfterXmlGeneration"]))
+				{
+					exitCode = RunTests();
+				}
 
 				// ANTO LOG
 				stopwatch.Stop();
@@ -64,6 +72,42 @@ namespace Xml2DbMapper.Host
 				//}
 				Logger.Log(ex.Message);
 			}
+		}
+
+		private static int RunTests()
+		{
+			IList<string> differentFiles = new List<string>();
+
+			string originalXmlDirectory = Environment.CurrentDirectory + System.Configuration.ConfigurationManager.AppSettings["OriginalXmlDirectory"];
+			string generatedXmlDirectory = Environment.CurrentDirectory + System.Configuration.ConfigurationManager.AppSettings["GeneratedXmlDirectory"];
+
+			IEnumerable<string> originalFiles = Directory.EnumerateFiles(originalXmlDirectory, "*.xml").Where(file => !file.ToLower().EndsWith("probepresets.xml")).OrderBy(file => file);
+			IEnumerable<string> generatedFiles = Directory.EnumerateFiles(generatedXmlDirectory, "*.xml").Where(file => !file.ToLower().EndsWith("probepresets.xml")).OrderBy(file => file);
+
+			if (originalFiles.Count() != generatedFiles.Count())
+			{
+				differentFiles.Add("Difference in number");
+				return -100;
+			}
+
+			int count = originalFiles.Count();
+			for (int i = 0; i < count; i++)
+			{
+				Logger.Log($"Test on {originalFiles.ElementAt(i)}");
+
+				if (!FileComparer.CompareFileHashes(originalFiles.ElementAt(i), generatedFiles.ElementAt(i)))
+				{
+					Logger.Log($"Difference in {originalFiles.ElementAt(i)}");
+					differentFiles.Add(originalFiles.ElementAt(i));
+				}
+			}
+
+			if (differentFiles.Count() > 0)
+			{
+				return -100;
+			}
+
+			return 0;
 		}
 	}
 }
