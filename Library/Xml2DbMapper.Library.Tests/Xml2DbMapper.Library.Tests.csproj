@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Xml2DbMapper.Reader\Xml2DbMapper.Reader.csproj" />
-    <ProjectReference Include="..\Xml2DbMapper.Writer\Xml2DbMapper.Writer.csproj" />
     <ProjectReference Include="..\Xml2DbWrapper.Core\Xml2DbMapper.Core.csproj" />
   </ItemGroup>
 
